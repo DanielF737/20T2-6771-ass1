@@ -33,3 +33,19 @@ TEST_CASE("at -> it") {
 
 	CHECK(ranges::any_of(ladders, testing::contain({"at", "it"})));
 }
+
+TEST_CASE("work -> play") {
+	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
+	auto const ladders = word_ladder::generate("work", "play", english_lexicon);
+
+	CHECK(ranges::size(ladders)>0);
+}
+
+
+//Test cases to include
+	//No Results
+	//One Result
+	//Many Results
+	//Ladder length 2
+	//Ladder length >2
+	//Check lexographical order
