@@ -34,9 +34,9 @@ TEST_CASE("at -> it") {
 	CHECK(ranges::any_of(ladders, testing::contain({"at", "it"})));
 }
 
-TEST_CASE("work -> play") {
+TEST_CASE("awake -> sleep") {
 	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
-	auto const ladders = word_ladder::generate("work", "play", english_lexicon);
+	auto const ladders = word_ladder::generate("awake", "sleep", english_lexicon);
 
 	CHECK(ranges::size(ladders)>0);
 }

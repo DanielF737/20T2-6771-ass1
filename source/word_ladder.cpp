@@ -47,8 +47,10 @@ namespace word_ladder {
             } else {
                 if (!found) {
                     variants = collect_variants(current, lexicon, visited);
-                    for (auto & variant : variants) {
-                        queue.push(variant); //Enqueue the variant
+                    if (!variants.empty()) {
+                        for (auto & variant : variants) {
+                            queue.push(variant); //Enqueue the variant
+                        }
                     }
                 }
             }
@@ -63,12 +65,13 @@ auto collect_variants(std::vector<std::string> const& words, absl::flat_hash_set
     auto variants = std::vector<std::vector<std::string>>();
     auto word = words.back(); //Grab the word currently at the end of the ladder
     auto alphabet = std::vector<char>{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    visited.size();
 
     for (size_t i = 0; i < word.size(); i++) {                                              //Loop through each character
-        for (size_t j = 0; j<25; j++) {                                                     //Loop through the alphabet
+        for (size_t j = 0; j<26; j++) {                                                     //Loop through the alphabet
             auto new_word = word;                                                           //Create a variable to hold new word
             new_word[i] = alphabet.at(j);                                                   //Change 1 letter in the new word
-            if (lexicon.contains(new_word) and !visited.contains(new_word)) {        //check if the last word in the current ladder is in the lexicon
+            if (lexicon.contains(new_word) and !visited.contains(new_word)) {               //check if the last word in the current ladder is in the lexicon
                 auto new_ladder=std::vector<std::string>();                                 //Create a new word ladder
                 new_ladder=words;                                                           //copy the start of the original word ladder
                 new_ladder.push_back(new_word);                                             //add the new word to the end of the word ladder
