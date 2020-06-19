@@ -38,6 +38,15 @@ TEST_CASE("Correct number of results") {
 	}
 
 	SECTION("1 result (1 valid path") {
+		auto const english_lexicon = word_ladder::read_lexicon("./smallEnglish.txt");
+		auto const ladders = word_ladder::generate("word", "bird", english_lexicon);
+
+
+		REQUIRE(!english_lexicon.empty()); 	//Ensure lexicon isnt empty
+		CHECK(ranges::size(ladders)==1); 	//Check that no results were returned
+
+		auto const expected = std::vector<std::vector<std::string>>{{"word", "ward", "bard", "bird"}};
+		CHECK(ladders==expected);
 
 	}
 

@@ -34,26 +34,26 @@ TEST_CASE("at -> it") { //Provided test
 	CHECK(ranges::any_of(ladders, testing::contain({"at", "it"})));
 }
 
-// TEST_CASE("awake -> sleep") {
-// 	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
-// 	auto const ladders = word_ladder::generate("awake", "sleep", english_lexicon);
+TEST_CASE("awake -> sleep") {
+	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
+	auto const ladders = word_ladder::generate("awake", "sleep", english_lexicon);
 
-// 	CHECK(ranges::size(ladders)>0);
-// }
+	CHECK(ranges::size(ladders)>0);
+}
 
-// TEST_CASE("work -> play") {
-// 	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
-// 	auto const ladders = word_ladder::generate("work", "play", english_lexicon);
+TEST_CASE("work -> play") {
+	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
+	auto const ladders = word_ladder::generate("work", "play", english_lexicon);
 
-// 	CHECK(ranges::size(ladders)>0);
-// }
+	CHECK(ranges::size(ladders)>0);
+}
 
-// TEST_CASE("airplane -> tricycle") {
-// 	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
-// 	auto const ladders = word_ladder::generate("airplane", "tricycle", english_lexicon);
+TEST_CASE("airplane -> tricycle") {
+	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
+	auto const ladders = word_ladder::generate("airplane", "tricycle", english_lexicon);
 
-// 	CHECK(ranges::size(ladders)>=0);
-// }
+	CHECK(ranges::size(ladders)>=0);
+}
 
 
 

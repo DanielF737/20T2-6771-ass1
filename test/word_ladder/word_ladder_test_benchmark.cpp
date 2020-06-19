@@ -17,6 +17,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "catch2/catch.hpp"
 #include "comp6771/testing/range/contain.hpp"
