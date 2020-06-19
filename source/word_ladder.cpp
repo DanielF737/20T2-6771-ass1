@@ -1,6 +1,7 @@
 #include "comp6771/word_ladder.hpp"
 #include "absl/container/flat_hash_set.h"
-//#include "range/v3/view.hpp"
+#include "range/v3/view.hpp"
+#include <range/v3/range/primitives.hpp>
 
 #include <cstddef>
 #include <string>
@@ -47,9 +48,9 @@ namespace word_ladder {
                 if (!found) {
                     results.push_back(current);
                     found = true;
-                    length = current.size();
+                    length = ranges::size(current);
                 } else {
-                    if (current.size()==length) {
+                    if (ranges::size(current)==length) {
                         if (results.empty()) {
                             results.push_back(current);
                         } else {
@@ -97,9 +98,8 @@ auto collect_variants(std::vector<std::string> const& words, absl::flat_hash_set
     auto variants = std::vector<std::vector<std::string>>();
     auto word = words.back(); //Grab the word currently at the end of the ladder
     auto alphabet = std::vector<char>{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    visited.size();
 
-    for (size_t i = 0; i < word.size(); i++) {                                              //Loop through each character
+    for (size_t i = 0; i < ranges::size(word); i++) {                                              //Loop through each character
         for (size_t j = 0; j<26; j++) {                                                     //Loop through the alphabet
             auto new_word = word;                                                           //Create a variable to hold new word
             new_word[i] = alphabet.at(j);                                                   //Change 1 letter in the new word
