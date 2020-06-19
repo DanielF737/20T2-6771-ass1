@@ -5,6 +5,11 @@ cxx_test(
    FILENAME word_ladder_test1.cpp
    LINK word_ladder lexicon Catch2::Catch2 range-v3 test_main
 )
+cxx_test(
+   TARGET word_ladder_myTests
+   FILENAME word_ladder_myTests.cpp
+   LINK word_ladder lexicon Catch2::Catch2 range-v3 test_main
+)
 
 cxx_test(
    TARGET word_ladder_test_benchmark

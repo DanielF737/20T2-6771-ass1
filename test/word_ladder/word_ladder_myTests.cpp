@@ -24,16 +24,54 @@
 #include "range/v3/algorithm/is_sorted.hpp"
 #include "range/v3/range/primitives.hpp"
 
-TEST_CASE("at -> it") { //Provided test
-	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
-	auto const ladders = word_ladder::generate("at", "it", english_lexicon);
+//Test cases to include
+	//Mismatched length
+	//Input and output same word
 
-	CHECK(ranges::size(ladders) == 1);
-	CHECK(ranges::is_sorted(ladders));
+TEST_CASE("Correct number of results") {
+	SECTION("No results (no valid path)") {
+		auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
+		auto const ladders = word_ladder::generate("airplane", "tricycle", english_lexicon);
 
-	CHECK(ranges::any_of(ladders, testing::contain({"at", "it"})));
+		REQUIRE(!english_lexicon.empty()); 	//Ensure lexicon isnt empty
+		CHECK(ranges::size(ladders)==0); 	//Check that no results were returned
+	}
+
+	SECTION("1 result (1 valid path") {
+
+	}
+
+	SECTION("Many results (many valid paths") {
+
+	}
+
+	SECTION("Ladder length 2 (starting and destination words are neighbors)") {
+
+	}
+
+	SECTION("Ladder length >2 (starting and destination words are not neighbors)") {
+
+	}
 }
 
+TEST_CASE("Correctness of results") {
+	SECTION("Correct words") {
+	}
+
+	SECTION("Lexicographical order") {
+
+	}
+}
+
+TEST_CASE("Edge Cases") {
+	SECTION("Mismatched starting and destination word lengths") {
+
+	}
+
+	SECTION("Starting and destination words are the same word") {
+
+	}
+}
 // TEST_CASE("awake -> sleep") {
 // 	auto const english_lexicon = word_ladder::read_lexicon("./english.txt");
 // 	auto const ladders = word_ladder::generate("awake", "sleep", english_lexicon);
@@ -54,16 +92,3 @@ TEST_CASE("at -> it") { //Provided test
 
 // 	CHECK(ranges::size(ladders)>=0);
 // }
-
-
-
-
-//Test cases to include
-	//No Results
-	//One Result
-	//Many Results
-	//Ladder length 2
-	//Ladder length >2
-	//Check lexographical order
-	//Mismatched length
-	//Input and output same word

@@ -1,10 +1,12 @@
 #include "comp6771/word_ladder.hpp"
 #include "absl/container/flat_hash_set.h"
+//#include "range/v3/view.hpp"
 
 #include <cstddef>
 #include <string>
 #include <vector>
 #include <queue>
+#include <iostream>
 
 // Write your implementation here
 auto collect_variants(std::vector<std::string> const& words, absl::flat_hash_set<std::string> const& lexicon, absl::flat_hash_set<std::string> const& visited) -> std::vector<std::vector<std::string>>;
@@ -18,6 +20,12 @@ namespace word_ladder {
         auto queue = std::queue<std::vector<std::string>>();        //Our queue for the BFS
         auto visited = absl::flat_hash_set<std::string>();          //Hash map to store words already accessed to help shorted execution times
         auto results = std::vector<std::vector<std::string>>();     //Hold the return values
+
+        if (from == to) {
+            auto retval = std::vector<std::string>{from};
+            results.push_back(retval);
+            return results;
+        }
 
         visited.insert(from);
 
@@ -33,6 +41,7 @@ namespace word_ladder {
         //Run through the queue until we find a valid ladder or the queue ends
         while (!queue.empty()){
             auto current = queue.front();
+
             visited.insert(current.back());     //Stop us going down redundant paths
             if (current.back()==to) {
                 if (!found) {
@@ -41,7 +50,31 @@ namespace word_ladder {
                     length = current.size();
                 } else {
                     if (current.size()==length) {
-                        results.push_back(current);
+                        if (results.empty()) {
+                            results.push_back(current);
+                        } else {
+                            //Lexicographical ordering
+                            auto inserted = false;
+                            for (auto i = results.begin(); i < results.end(); i++){ //Loop through the current results
+                                auto k = current.begin();
+                                for (auto j = i->begin(); j < i->end(); j++) { //Loop through the inner vectors
+                                    if (*k != *j) { //Check alphabetical ordering, if the words arent the same, we are stopping this list either way
+                                        if (*k < *j) {  //if the new lest is alphabetically above, insert the new list before and exit the loop
+                                            inserted=true;
+                                            results.insert(i, current);
+                                        }
+                                        break;
+                                    }
+                                    k++;
+                                }
+                                if (inserted) { //If we have already inserted the new list, exit, else, compare against the next list in results
+                                    break;
+                                }
+                            }
+                            if (!inserted) { //If we got to the end (AKA its lexicographically last) stick it on at the end of results
+                                results.push_back(current);
+                            }
+                        }
                     }
                 }
             } else {
@@ -56,7 +89,6 @@ namespace word_ladder {
             }
             queue.pop();
         }
-
         return results;
     }
 } // namespace word_ladder
